@@ -17,7 +17,7 @@ This project is currently in development.
 4-i- add color and strings to \android\app\src\main\res\values AND values-ar \
 4-ii- replace the primary color in \android\app\src\main\res\drawable AND drawable-v21 \
 4-iii- change the CFBundleName (app name) in \ios\Runner\Info.plist \
-4-iv-  change the color backgroundColor in \ios\Runner\Base.lproj\LaunchScreen.storyboard \
+4-iv-  change the color backgroundColor in \ios\Runner\Base.lproj\LaunchScreen.storyboard
 
 ### Resources
 
@@ -32,4 +32,4 @@ This project is currently in development.
 9- app router: Auto Routes provider \
 9-i- configure the manager with annotations and generated file \
 9-ii- mark every page with @RoutePage() \
-9-iii- configure the guards \
+9-iii- configure the guards

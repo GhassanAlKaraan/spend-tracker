@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +7,8 @@ import 'package:flutterfire_template/resources/color_manager.dart';
 import 'package:flutterfire_template/resources/font_manager.dart';
 import 'package:flutterfire_template/resources/styles_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+const String LOGIN_PREF_KEY = 'logged_in'; // value: bool
 
 @RoutePage()
 class LoginPage extends StatefulWidget {
@@ -29,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
 
-      sharedPreferences.setBool('logged_in', true);
+      sharedPreferences.setBool(LOGIN_PREF_KEY, true);
     } else {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('Wrong credentials')));
