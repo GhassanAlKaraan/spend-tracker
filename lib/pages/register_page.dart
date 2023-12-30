@@ -1,22 +1,25 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_template/resources/color_manager.dart';
 import 'package:flutterfire_template/resources/styles_manager.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+@RoutePage()
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Home Page",
-          style: getRegularStyle(color: ColorManager.black),
-        ),
-      ),
+          centerTitle: true,
+          title: Text(
+            "REGISTER PAGE",
+            style: getMediumStyle(color: ColorManager.darkGrey)
+                .copyWith(fontSize: 24),
+          )),
       body: Center(
         child: Text(
-          "Home Page", //!
+          "Register Page", //!
           style: getRegularStyle(color: ColorManager.black),
         ),
       ),
