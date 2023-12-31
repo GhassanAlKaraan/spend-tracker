@@ -16,9 +16,8 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
           centerTitle: true,
           title: Text(
-            "Profile PAGE",
-            style: getMediumStyle(color: ColorManager.darkGrey)
-                .copyWith(fontSize: 24),
+            "Profile",
+            style: Theme.of(context).textTheme.displayLarge
           )),
       body: Center(
         child: Column(

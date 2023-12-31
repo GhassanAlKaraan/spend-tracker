@@ -13,8 +13,8 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Home Page",
-          style: getRegularStyle(color: ColorManager.black),
+          "Home",
+          style: Theme.of(context).textTheme.displayLarge
         ),
       ),
       body: Center(
@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
           const SizedBox(height: 10),
           TextButton(
               onPressed: () {
-                //context.router.push(LoginRoute());
+                context.router.push(LoginRoute(onResult: (bool? x) {  }));
               },
               child: const Text("Login Page")),
           const SizedBox(height: 10),

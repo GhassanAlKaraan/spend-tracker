@@ -13,9 +13,8 @@ class RegisterPage extends StatelessWidget {
       appBar: AppBar(
           centerTitle: true,
           title: Text(
-            "REGISTER PAGE",
-            style: getMediumStyle(color: ColorManager.darkGrey)
-                .copyWith(fontSize: 24),
+            "Register",
+            style: Theme.of(context).textTheme.displayLarge
           )),
       body: Center(
         child: Text(
