@@ -2,11 +2,16 @@
 
 class AppStrings {
 
-  //* App string values
-  
+  //* Code constant strings
+  static const String page1NavBarTitle = "Page 1";
+  static const String page2NavBarTitle = "Page 2";
+  static const String page3NavBarTitle = "Page 3";
+
+  //* Screen string values
+
   static const String onBoardingTitle1 = "on_boarding_title1";
 
-  //* App system string values
+  //* Screen system string values
   static const String skip = "skip";
   static const String username = "username_hint";
   static const String mobileNumber = "mobile_number_hint";

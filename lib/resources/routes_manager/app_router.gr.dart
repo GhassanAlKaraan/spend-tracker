@@ -10,21 +10,21 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i6;
 import 'package:flutter/material.dart' as _i7;
-import 'package:flutterfire_template/pages/home_page.dart' as _i1;
+import 'package:flutterfire_template/pages/bottom_nav_bar_page.dart' as _i1;
 import 'package:flutterfire_template/pages/login_page.dart' as _i2;
-import 'package:flutterfire_template/pages/main_page.dart' as _i3;
-import 'package:flutterfire_template/pages/profile_page.dart' as _i4;
-import 'package:flutterfire_template/pages/register_page.dart' as _i5;
+import 'package:flutterfire_template/pages/page_1.dart' as _i3;
+import 'package:flutterfire_template/pages/page_2.dart' as _i4;
+import 'package:flutterfire_template/pages/page_3.dart' as _i5;
 
 abstract class $AppRouter extends _i6.RootStackRouter {
   $AppRouter({super.navigatorKey});
 
   @override
   final Map<String, _i6.PageFactory> pagesMap = {
-    HomeRoute.name: (routeData) {
+    BottomNavBarRoute.name: (routeData) {
       return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.HomePage(),
+        child: const _i1.BottomNavBarPage(),
       );
     },
     LoginRoute.name: (routeData) {
@@ -37,37 +37,37 @@ abstract class $AppRouter extends _i6.RootStackRouter {
         ),
       );
     },
-    MainRoute.name: (routeData) {
+    Route1.name: (routeData) {
       return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i3.MainPage(),
+        child: const _i3.Page1(),
       );
     },
-    ProfileRoute.name: (routeData) {
+    Route2.name: (routeData) {
       return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.ProfilePage(),
+        child: const _i4.Page2(),
       );
     },
-    RegisterRoute.name: (routeData) {
+    Route3.name: (routeData) {
       return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i5.RegisterPage(),
+        child: const _i5.Page3(),
       );
     },
   };
 }
 
 /// generated route for
-/// [_i1.HomePage]
-class HomeRoute extends _i6.PageRouteInfo<void> {
-  const HomeRoute({List<_i6.PageRouteInfo>? children})
+/// [_i1.BottomNavBarPage]
+class BottomNavBarRoute extends _i6.PageRouteInfo<void> {
+  const BottomNavBarRoute({List<_i6.PageRouteInfo>? children})
       : super(
-          HomeRoute.name,
+          BottomNavBarRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'HomeRoute';
+  static const String name = 'BottomNavBarRoute';
 
   static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
 }
@@ -111,43 +111,43 @@ class LoginRouteArgs {
 }
 
 /// generated route for
-/// [_i3.MainPage]
-class MainRoute extends _i6.PageRouteInfo<void> {
-  const MainRoute({List<_i6.PageRouteInfo>? children})
+/// [_i3.Page1]
+class Route1 extends _i6.PageRouteInfo<void> {
+  const Route1({List<_i6.PageRouteInfo>? children})
       : super(
-          MainRoute.name,
+          Route1.name,
           initialChildren: children,
         );
 
-  static const String name = 'MainRoute';
+  static const String name = 'Route1';
 
   static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i4.ProfilePage]
-class ProfileRoute extends _i6.PageRouteInfo<void> {
-  const ProfileRoute({List<_i6.PageRouteInfo>? children})
+/// [_i4.Page2]
+class Route2 extends _i6.PageRouteInfo<void> {
+  const Route2({List<_i6.PageRouteInfo>? children})
       : super(
-          ProfileRoute.name,
+          Route2.name,
           initialChildren: children,
         );
 
-  static const String name = 'ProfileRoute';
+  static const String name = 'Route2';
 
   static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i5.RegisterPage]
-class RegisterRoute extends _i6.PageRouteInfo<void> {
-  const RegisterRoute({List<_i6.PageRouteInfo>? children})
+/// [_i5.Page3]
+class Route3 extends _i6.PageRouteInfo<void> {
+  const Route3({List<_i6.PageRouteInfo>? children})
       : super(
-          RegisterRoute.name,
+          Route3.name,
           initialChildren: children,
         );
 
-  static const String name = 'RegisterRoute';
+  static const String name = 'Route3';
 
   static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
 }
