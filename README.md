@@ -1,6 +1,6 @@
 # flutterfire_template
 
-Flutter Firebase template of plugins.
+Flutter & Firebase full app template (Project is in progress...)
 
 ## Preparation
 
