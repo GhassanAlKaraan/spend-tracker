@@ -4,6 +4,9 @@ import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_template/app/app_prefs.dart';
+import 'package:flutterfire_template/resources/color_manager.dart';
+import 'package:flutterfire_template/resources/font_manager.dart';
+import 'package:flutterfire_template/resources/styles_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 @RoutePage()
@@ -37,9 +40,11 @@ class _LoginPageState extends State<LoginPage> {
           )),
       body: SafeArea(
         child: Center(
-            child: TextButton(
+            child: ElevatedButton(
           onPressed: _login,
-          child: Text("Authorize", style: Theme.of(context).textTheme.headlineMedium),
+          child: Text("Authorize",
+              style: getRegularStyle(
+                  color: ColorManager.white, fontSize: FontSize.s16)),
         )),
       ),
     );

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutterfire_template/resources/routes_manager/app_router.dart';
+// import 'package:flutterfire_template/resources/routes_manager/1_navbar_routing/app_router.dart';
+//import 'package:flutterfire_template/resources/routes_manager/2_paths_routing/app_router.dart';
+import 'package:flutterfire_template/resources/routes_manager/3_nested_routing/app_router.dart';
+
+
 import 'package:flutterfire_template/resources/theme_manager.dart';
 
 class App extends StatelessWidget {
