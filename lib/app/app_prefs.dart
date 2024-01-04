@@ -2,6 +2,7 @@
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+// used
 const String PREFS_IS_USER_LOGGED_IN = "PREFS_KEY_IS_USER_LOGGED_IN";
 
 // Not used

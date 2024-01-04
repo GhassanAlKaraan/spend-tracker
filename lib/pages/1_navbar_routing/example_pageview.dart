@@ -15,6 +15,7 @@ class FeedPage extends StatelessWidget {
         VideoRoute(),
       ],
       builder: (context, child, _) {
+        // ignore: unused_local_variable
         final tabsRouter = AutoTabsRouter.of(context);
         
         // [ScaffoldWithNavbar] is just a widget create that contains a [BottomNavigationBarItem]

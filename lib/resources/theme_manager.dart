@@ -54,7 +54,8 @@ ThemeData getApplicationTheme() {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSize.s8),
         ),
-        backgroundColor: ColorManager.primary,
+        foregroundColor: ColorManager.white, //text
+        backgroundColor: ColorManager.primary, //button
         elevation: AppSize.s4,
         shadowColor: ColorManager.primaryOpacity70,
         textStyle:
