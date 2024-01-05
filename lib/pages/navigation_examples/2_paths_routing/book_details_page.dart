@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-@RoutePage()
+//@RoutePage()
 class BookDetailsPage extends StatelessWidget {
   const BookDetailsPage({super.key, @PathParam('id') required this.id});
 

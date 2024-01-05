@@ -12,7 +12,7 @@ This project is currently in development.
 2- images (1.5x, 2.0x... mainly only used for splash logo) \
 2-i- deprecated: replace mipmap images in \android\app\src\main\res \
 2-ii- deprecated: replace .appiconset in \ios\Runner\Assets.xcassets \
-3- not used yet: json and translations files \
+3- json (visuals) and translations files \
 4- change launch splash screen \
 4-i- add color and strings to \android\app\src\main\res\values AND values-ar \
 4-ii- replace the primary color in \android\app\src\main\res\drawable AND drawable-v21 \
@@ -34,3 +34,15 @@ This project is currently in development.
 9-ii- mark every page with @RoutePage() \
 9-iii- configure the guards \
 9-iv- configure tabsrouter
+
+### Pending
+
+1- implement translations \
+2- design a scaffold template (streambuilder)\
+3- design a register page \
+4- design a login page \
+5- design a forgot password page \
+6- design a home page \
+7- data layer \
+8- domain layer \
+9- provider

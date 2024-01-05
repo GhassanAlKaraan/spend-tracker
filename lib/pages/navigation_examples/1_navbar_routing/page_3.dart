@@ -1,7 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-@RoutePage()
+//@RoutePage()
 class Page3 extends StatelessWidget {
   const Page3({super.key});
 

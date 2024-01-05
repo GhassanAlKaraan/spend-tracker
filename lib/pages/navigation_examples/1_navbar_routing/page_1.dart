@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutterfire_template/app/app_prefs.dart';
 import 'package:flutterfire_template/resources/color_manager.dart';
 import 'package:flutterfire_template/resources/font_manager.dart';
-import 'package:flutterfire_template/resources/routes_manager/1_navbar_routing/app_router.gr.dart';
+import 'package:flutterfire_template/resources/routes_manager/navigation_examples/1_navbar_routing/app_router.gr.dart';
 import 'package:flutterfire_template/resources/styles_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-@RoutePage()
+//@RoutePage()
 class Page1 extends StatefulWidget {
   const Page1({super.key});
 

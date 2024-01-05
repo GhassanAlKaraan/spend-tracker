@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_template/resources/color_manager.dart';
 
-@RoutePage()
+//@RoutePage()
 class BookListPage extends StatelessWidget {
   const BookListPage({super.key});
 

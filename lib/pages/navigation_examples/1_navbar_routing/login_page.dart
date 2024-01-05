@@ -1,7 +1,5 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:auto_route/annotations.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_template/app/app_prefs.dart';
 import 'package:flutterfire_template/resources/color_manager.dart';
@@ -9,7 +7,7 @@ import 'package:flutterfire_template/resources/font_manager.dart';
 import 'package:flutterfire_template/resources/styles_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-@RoutePage()
+//@RoutePage()
 class LoginPage extends StatefulWidget {
   final Function(bool?) onResult; // logged in?
   const LoginPage({super.key, required this.onResult});
