@@ -8,6 +8,9 @@ import 'values_manager.dart';
 
 ThemeData getApplicationTheme() {
   return ThemeData(
+
+visualDensity: VisualDensity.adaptivePlatformDensity,
+
     //* Main App colors
     primaryColor: ColorManager.primary,
     primaryColorLight: ColorManager.primaryOpacity70,
