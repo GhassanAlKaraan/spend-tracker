@@ -45,4 +45,5 @@ This project is currently in development.
 6- design a home page \
 7- data layer \
 8- domain layer \
-9- provider
+9- provider \
+10- FlutterSecureStorage
