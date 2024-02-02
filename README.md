@@ -1,9 +1,10 @@
-# spend_tracker
+# Spend Tracker
 
-Flutter app connected to NodeJs/ExpressJs/MongoDB backend API
+With this app users can track their money spending.
 
 ## Preparation
 
+Flutter app connected to NodeJs/ExpressJs/MongoDB backend API. \
 This project is still in the development planning stage.
 
 ### Assets
