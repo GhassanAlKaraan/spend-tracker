@@ -1,10 +1,10 @@
-# flutterfire_template
+# spend_tracker
 
-Flutter & Firebase full app template (Project is in progress...)
+Flutter app connected to NodeJs/ExpressJs/MongoDB backend API
 
 ## Preparation
 
-This project is currently in development.
+This project is still in the development planning stage.
 
 ### Assets
 
@@ -12,7 +12,7 @@ This project is currently in development.
 2- images (1.5x, 2.0x... mainly only used for splash logo) \
 2-i- deprecated: replace mipmap images in \android\app\src\main\res \
 2-ii- deprecated: replace .appiconset in \ios\Runner\Assets.xcassets \
-3- json (visuals) and translations files \
+3- json and svg files \
 4- change launch splash screen \
 4-i- add color and strings to \android\app\src\main\res\values AND values-ar \
 4-ii- replace the primary color in \android\app\src\main\res\drawable AND drawable-v21 \
@@ -31,7 +31,7 @@ This project is currently in development.
 8- theme manager: ThemeData depending on other providers \
 9- app router: Auto Routes provider \
 9-i- configure the manager with annotations and generated file \
-9-ii- mark every page with @RoutePage() \
+9-ii- configure pages and parameters @RoutePage() \
 9-iii- configure the guards \
 9-iv- configure tabsrouter
 
