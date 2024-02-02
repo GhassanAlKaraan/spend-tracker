@@ -2,26 +2,30 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutterfire_template/screens/login.dart';
 import 'package:flutterfire_template/resources/assets_manager.dart';
 import 'package:flutterfire_template/resources/color_manager.dart';
 
-class SplashView extends StatefulWidget {
-  const SplashView({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<SplashView> createState() => _SplashViewState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashViewState extends State<SplashView> {
-  
+class _SplashScreenState extends State<SplashScreen> {
   Timer? _timer;
 
   _startDelay() {
     _timer = Timer(const Duration(seconds: 3), () => _goNext());
   }
 
-  _goNext() { //TODO: use auto router to navigate to home.
-    // Navigator.pushReplacementNamed(context, Routes.onBoardingRoute);
+  _goNext() {
+    //todo: temporary
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => LoginScreen()),
+    );
   }
 
   @override

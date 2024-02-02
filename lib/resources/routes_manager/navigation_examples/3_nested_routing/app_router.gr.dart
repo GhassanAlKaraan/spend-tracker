@@ -10,27 +10,27 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i13;
 import 'package:flutter/material.dart' as _i14;
-import 'package:flutterfire_template/pages/navigation_examples/1_navbar_routing/bottom_nav_bar_page.dart'
+import 'package:flutterfire_template/screens/navigation_examples/1_navbar_routing/bottom_nav_bar_page.dart'
     as _i4;
-import 'package:flutterfire_template/pages/navigation_examples/1_navbar_routing/login_page.dart'
+import 'package:flutterfire_template/screens/navigation_examples/1_navbar_routing/login_page.dart'
     as _i7;
-import 'package:flutterfire_template/pages/navigation_examples/1_navbar_routing/page_1.dart' as _i8;
-import 'package:flutterfire_template/pages/navigation_examples/1_navbar_routing/page_2.dart' as _i9;
-import 'package:flutterfire_template/pages/navigation_examples/1_navbar_routing/page_3.dart'
+import 'package:flutterfire_template/screens/navigation_examples/1_navbar_routing/page_1.dart' as _i8;
+import 'package:flutterfire_template/screens/navigation_examples/1_navbar_routing/page_2.dart' as _i9;
+import 'package:flutterfire_template/screens/navigation_examples/1_navbar_routing/page_3.dart'
     as _i10;
-import 'package:flutterfire_template/pages/navigation_examples/1_navbar_routing/page_4.dart'
+import 'package:flutterfire_template/screens/navigation_examples/1_navbar_routing/page_4.dart'
     as _i11;
-import 'package:flutterfire_template/pages/navigation_examples/2_paths_routing/book_details_page.dart'
+import 'package:flutterfire_template/screens/navigation_examples/2_paths_routing/book_details_page.dart'
     as _i2;
-import 'package:flutterfire_template/pages/navigation_examples/2_paths_routing/book_list_page.dart'
+import 'package:flutterfire_template/screens/navigation_examples/2_paths_routing/book_list_page.dart'
     as _i3;
-import 'package:flutterfire_template/pages/navigation_examples/2_paths_routing/home_page.dart'
+import 'package:flutterfire_template/screens/navigation_examples/2_paths_routing/home_page.dart'
     as _i6;
-import 'package:flutterfire_template/pages/navigation_examples/3_nested_routing/audio_page.dart'
+import 'package:flutterfire_template/screens/navigation_examples/3_nested_routing/audio_page.dart'
     as _i1;
-import 'package:flutterfire_template/pages/navigation_examples/3_nested_routing/feed_page.dart'
+import 'package:flutterfire_template/screens/navigation_examples/3_nested_routing/feed_page.dart'
     as _i5;
-import 'package:flutterfire_template/pages/navigation_examples/3_nested_routing/video_page.dart'
+import 'package:flutterfire_template/screens/navigation_examples/3_nested_routing/video_page.dart'
     as _i12;
 
 abstract class $AppRouter extends _i13.RootStackRouter {

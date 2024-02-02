@@ -55,8 +55,9 @@ visualDensity: VisualDensity.adaptivePlatformDensity,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppSize.s8),
+          borderRadius: BorderRadius.circular(AppSize.s14),
         ),
+        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p28, vertical: AppPadding.p14),
         foregroundColor: ColorManager.white, //text
         backgroundColor: ColorManager.primary, //button
         elevation: AppSize.s4,
@@ -68,8 +69,8 @@ visualDensity: VisualDensity.adaptivePlatformDensity,
 
     //* Text theme
     textTheme: TextTheme(
-      displayLarge: getBoldStyle(color: ColorManager.darkGrey, fontSize: FontSize.s16),
-      titleMedium: getMediumStyle(color: ColorManager.grey1, fontSize: FontSize.s14),
+      displayLarge: getBoldStyle(color: ColorManager.darkGrey, fontSize: FontSize.s20),
+      titleMedium: getMediumStyle(color: ColorManager.grey1, fontSize: FontSize.s16),
       titleSmall: getRegularStyle(color: ColorManager.primary, fontSize: FontSize.s14),
       bodyLarge: getRegularStyle(color: ColorManager.grey),
     ),
@@ -81,7 +82,7 @@ visualDensity: VisualDensity.adaptivePlatformDensity,
       labelStyle: getMediumStyle(color: ColorManager.darkGrey),
       errorStyle: getRegularStyle(color: ColorManager.error),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppSize.s8),
+        borderRadius: BorderRadius.circular(AppSize.s14),
         borderSide: BorderSide(color: ColorManager.grey, width: AppSize.s1_5),
       ),
       focusedBorder: OutlineInputBorder(
