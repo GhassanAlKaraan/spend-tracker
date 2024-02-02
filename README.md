@@ -36,15 +36,7 @@ This project is still in the development planning stage.
 9-iii- configure the guards \
 9-iv- configure tabsrouter
 
-### Pending
+### Command
 
-1- implement translations \
-2- design a scaffold template (streambuilder)\
-3- design a register page \
-4- design a login page \
-5- design a forgot password page \
-6- design a home page \
-7- data layer \
-8- domain layer \
-9- provider \
-10- FlutterSecureStorage
+Auto route generation command: \
+dart run build_runner build --delete-conflicting-outputs

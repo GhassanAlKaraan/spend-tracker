@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutterfire_template/resources/color_manager.dart';
-import 'package:flutterfire_template/resources/font_manager.dart';
-import 'package:flutterfire_template/resources/values_manager.dart';
-import 'package:flutterfire_template/widgets/my_drawer.dart';
+import 'package:spend_tracker/resources/color_manager.dart';
+import 'package:spend_tracker/resources/font_manager.dart';
+import 'package:spend_tracker/resources/values_manager.dart';
+import 'package:spend_tracker/widgets/my_drawer.dart';
+import 'package:spend_tracker/widgets/my_fab.dart';
 
 class MyScaffold extends StatelessWidget {
   const MyScaffold({
@@ -10,18 +11,21 @@ class MyScaffold extends StatelessWidget {
     required this.barTitle,
     this.customActions,
     this.child,
-    bool? hasDrawer,
-  }) : hasDrawer = hasDrawer ?? false;
+    required this.hasDrawer,
+    this.fab
+  });
 
   final String barTitle;
   final IconButton? customActions;
   final bool hasDrawer;
+  final MyFAB? fab;
   final Widget? child;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorManager.background,
+      floatingActionButton: fab ?? Container(),
       drawer: hasDrawer ? const MyDrawer() : null,
       appBar: AppBar(
         elevation: 0,

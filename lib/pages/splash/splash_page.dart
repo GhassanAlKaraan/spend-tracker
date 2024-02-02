@@ -1,19 +1,21 @@
 // ignore_for_file: unused_field
 
 import 'dart:async';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterfire_template/screens/login.dart';
-import 'package:flutterfire_template/resources/assets_manager.dart';
-import 'package:flutterfire_template/resources/color_manager.dart';
+import 'package:spend_tracker/resources/assets_manager.dart';
+import 'package:spend_tracker/resources/color_manager.dart';
+import 'package:spend_tracker/resources/routes_manager/app_router.gr.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+@RoutePage()
+class SplashPage extends StatefulWidget {
+  const SplashPage({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashPageState extends State<SplashPage> {
   Timer? _timer;
 
   _startDelay() {
@@ -21,11 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _goNext() {
-    //todo: temporary
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => LoginScreen()),
-    );
+    AutoRouter.of(context).replace(const HomeRoute());
   }
 
   @override

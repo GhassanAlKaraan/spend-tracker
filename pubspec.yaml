@@ -1,5 +1,5 @@
-name: flutterfire_template
-description: "A new Flutter project."
+name: spend_tracker
+description: "Track Spendings"
 publish_to: 'none'
 version: 0.1.0
 
