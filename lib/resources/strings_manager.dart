@@ -15,6 +15,12 @@ class AppStrings {
   static const invalidEmailError = 'Invalid Email';
   static const invalidPasswordError = 'Password cannot be empty';
 
-  // Home Page
-  static const homePageTitle = 'Home';
+  // Records Page
+  static const recordsPageTitle = 'Records';
+
+  // Edit Record Page
+  static const editRecordTitle = 'Edit Record';
+
+  // Add Record Page
+  static const addRecordTitle = 'Add Record';
 }

@@ -10,7 +10,7 @@ import 'package:spend_tracker/widgets/my_scaffold.dart';
 class LoginPage extends StatelessWidget {
   final Function(bool?) onResult;
 
-  void setAuthenticated() async {
+  void setAuthorized() async {
     onResult.call(true);
 
     AppPreferences appPreferences =
@@ -25,7 +25,7 @@ class LoginPage extends StatelessWidget {
     return MyScaffold(
       barTitle: AppStrings.loginPageTitle,
       hasDrawer: false,
-      child: LoginCard(authenticate: setAuthenticated),
+      child: LoginCard(authorize: setAuthorized),
     );
   }
 }

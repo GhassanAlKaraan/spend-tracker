@@ -6,9 +6,9 @@ import '../../resources/values_manager.dart';
 
 class LoginCard extends StatelessWidget {
 
-  final Function() authenticate;
+  final Function() authorize;
 
-  LoginCard({super.key, required this.authenticate});
+  LoginCard({super.key, required this.authorize});
   // Form key
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   // Controllers
@@ -21,7 +21,7 @@ class LoginCard extends StatelessWidget {
       //TODO: If the form is valid, proceed with the login logic
       
       // This athenticates the user and updates the shared preferences.
-      await authenticate();
+      await authorize();
       
     }
   }

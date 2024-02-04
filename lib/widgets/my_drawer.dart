@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spend_tracker/app/app_prefs.dart';
 import 'package:spend_tracker/resources/routes_manager/app_router.gr.dart';
+import 'package:spend_tracker/resources/strings_manager.dart';
 
 import '../resources/color_manager.dart';
 
@@ -30,16 +31,15 @@ class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      // TODO: Refactor
       child: ListView(
         padding: EdgeInsets.zero,
-        children: <Widget>[
+        children: [
           DrawerHeader(
             decoration: BoxDecoration(
               color: ColorManager.primary,
             ),
             child: Text(
-              'Drawer Header',
+              AppStrings.appName,
               style: TextStyle(
                 color: ColorManager.background,
                 fontSize: 24,
@@ -47,22 +47,10 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.account_circle),
-            title: const Text('Profile'),
-            onTap: () {
-              // Update the state of the app
-              // ...
-              // Then close the drawer
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
             leading: const Icon(Icons.settings),
             title: const Text('Settings'),
             onTap: () {
-              // Update the state of the app
-              // ...
-              // Then close the drawer
+              
               Navigator.pop(context);
             },
           ),
@@ -73,7 +61,7 @@ class _MyDrawerState extends State<MyDrawer> {
                   onTap: () {
                     appPreferences!.logout();
                     Navigator.pop(context);
-                    AutoRouter.of(context).replace(const HomeRoute());
+                    AutoRouter.of(context).replace(const RecordsRoute());
                   },
                 )
               : Container(),

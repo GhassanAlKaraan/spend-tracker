@@ -69,8 +69,8 @@ visualDensity: VisualDensity.adaptivePlatformDensity,
 
     //* Text theme
     textTheme: TextTheme(
-      displayLarge: getBoldStyle(color: ColorManager.darkGrey, fontSize: FontSize.s20),
-      titleMedium: getMediumStyle(color: ColorManager.grey1, fontSize: FontSize.s16),
+      displayLarge: getBoldStyle(color: ColorManager.primary, fontSize: FontSize.s22),
+      titleMedium: getMediumStyle(color: ColorManager.grey1, fontSize: FontSize.s18),
       titleSmall: getRegularStyle(color: ColorManager.primary, fontSize: FontSize.s14),
       bodyLarge: getRegularStyle(color: ColorManager.grey),
     ),
