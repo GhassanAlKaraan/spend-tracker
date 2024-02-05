@@ -21,12 +21,13 @@ abstract class $AppRouter extends _i5.RootStackRouter {
   @override
   final Map<String, _i5.PageFactory> pagesMap = {
     EditRecord.name: (routeData) {
-      final args = routeData.argsAs<EditRecordArgs>();
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<EditRecordArgs>(
+          orElse: () => EditRecordArgs(id: pathParams.getInt('id')));
       return _i5.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i1.EditRecord(
           key: args.key,
-          details: args.details,
           id: args.id,
         ),
       );
@@ -61,14 +62,12 @@ abstract class $AppRouter extends _i5.RootStackRouter {
 class EditRecord extends _i5.PageRouteInfo<EditRecordArgs> {
   EditRecord({
     _i6.Key? key,
-    required Map<String, dynamic> details,
     required int id,
     List<_i5.PageRouteInfo>? children,
   }) : super(
           EditRecord.name,
           args: EditRecordArgs(
             key: key,
-            details: details,
             id: id,
           ),
           rawPathParams: {'id': id},
@@ -84,19 +83,16 @@ class EditRecord extends _i5.PageRouteInfo<EditRecordArgs> {
 class EditRecordArgs {
   const EditRecordArgs({
     this.key,
-    required this.details,
     required this.id,
   });
 
   final _i6.Key? key;
 
-  final Map<String, dynamic> details;
-
   final int id;
 
   @override
   String toString() {
-    return 'EditRecordArgs{key: $key, details: $details, id: $id}';
+    return 'EditRecordArgs{key: $key, id: $id}';
   }
 }
 

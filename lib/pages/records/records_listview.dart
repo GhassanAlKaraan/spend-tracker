@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:spend_tracker/resources/color_manager.dart';
 import 'package:spend_tracker/resources/values_manager.dart';
 
-class RecordsListView extends StatelessWidget {
+
 
   // TODO: populate the records when this widget is built.
   final List<Map<String, dynamic>> items = [
@@ -36,6 +36,8 @@ class RecordsListView extends StatelessWidget {
     },
   ];
 
+class RecordsListView extends StatelessWidget {
+
   RecordsListView({super.key});
 
   @override
@@ -43,7 +45,7 @@ class RecordsListView extends StatelessWidget {
     return ListView.builder(
       itemCount: items.length,
       itemBuilder: (context, index) {
-        final item = items[index];
+        final Map<String, dynamic> item = items[index];
         final int id = index + 1;
         return Padding(
           padding: const EdgeInsets.all(AppPadding.p4),
