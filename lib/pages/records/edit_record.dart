@@ -17,11 +17,24 @@ class EditRecord extends StatelessWidget {
     return MyScaffold(
       appBarTitle: AppStrings.editRecordTitle,
       hasDrawer: false,
-      child: Column(
+      child: Column(//TODO refactor
         children: [
           Text('$id'),
-          const SizedBox(height: 20), //TODO; refactor
-          EditRecordCard(record: details, onSave: (details) {}),
+          const SizedBox(height: 20),
+          EditRecordCard(record: details, onSave: (Map<String, dynamic> newDetails) {
+            //TODO update the record in the provider list
+
+            // here the function must update the record with newDetails
+            // but where's the record? in the list of records.
+            // where's the list of records? in the provider class
+            // when first fetched, the list in provided must get populated from the api response
+            //! TODO: implement provider ASAP
+            //? This code should be used on the records page to notify UI and update list
+            //? but isn't it done by provider? yes... yeah I should learn a lot more about it.
+            // Notify UI of updated list
+            // setState(() {});
+
+          }),
         ],
       ),
     );
