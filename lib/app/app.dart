@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spend_tracker/resources/routes_manager/app_router.dart';
+import 'package:spend_tracker/resources/app_router.dart';
 import 'package:spend_tracker/resources/theme_manager.dart';
 
 class App extends StatelessWidget {
@@ -10,9 +10,8 @@ class App extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    AppRouter appRouter = AppRouter();
     return MaterialApp.router(
-      routerConfig: appRouter.config(),
+      routerConfig: goRouter,
       theme: getApplicationTheme(),
       debugShowCheckedModeBanner: false,
     );

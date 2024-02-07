@@ -1,6 +1,6 @@
 # Spend Tracker
 
-With this app users can track their money spending.
+With this app users can track their money spendings.
 
 ## Preparation
 
@@ -30,13 +30,4 @@ This project is still in the development planning stage.
 6- strings manager: string values provider \
 7- language manager: localization languages provider \
 8- theme manager: ThemeData depending on other providers \
-9- app router: Auto Routes provider \
-9-i- configure the manager with annotations and generated file \
-9-ii- configure pages and parameters @RoutePage() \
-9-iii- configure the guards \
-9-iv- configure tabsrouter
-
-### Command
-
-Auto route generation command: \
-dart run build_runner build --delete-conflicting-outputs
+9- go router: navigation provider

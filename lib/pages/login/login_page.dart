@@ -23,7 +23,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyScaffold(
-      barTitle: AppStrings.loginPageTitle,
+      appBarTitle: AppStrings.loginPageTitle,
       hasDrawer: false,
       child: LoginCard(authorize: setAuthorized),
     );

@@ -8,14 +8,14 @@ import 'package:spend_tracker/widgets/my_fab.dart';
 class MyScaffold extends StatelessWidget {
   const MyScaffold({
     super.key,
-    required this.barTitle,
+    required this.appBarTitle,
     this.customActions,
     this.child,
     required this.hasDrawer,
     this.fab
   });
 
-  final String barTitle;
+  final String appBarTitle;
   final IconButton? customActions;
   final bool hasDrawer;
   final MyFAB? fab;
@@ -34,7 +34,7 @@ class MyScaffold extends StatelessWidget {
         centerTitle: true,
         actions: [if (customActions != null) customActions!],
         title: Text(
-          barTitle.toUpperCase(),
+          appBarTitle.toUpperCase(),
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 color: ColorManager.white,
                 fontSize: FontSize.s24,

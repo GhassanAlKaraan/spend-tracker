@@ -12,7 +12,7 @@ class RecordsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyScaffold(
-      barTitle: AppStrings.recordsPageTitle,
+      appBarTitle: AppStrings.recordsPageTitle,
       hasDrawer: true,
       fab: MyFAB(onPressed: () {}),
       child: Column(

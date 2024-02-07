@@ -103,7 +103,7 @@ class _EditRecordCardState extends State<EditRecordCard> {
                   controller: _dateCreatedController,
                   decoration: const InputDecoration(labelText: 'Date Created'),
                 ),
-                const SizedBox(height: 35),
+                const SizedBox(height: AppSize.s40),
                 ElevatedButton(
                   onPressed: _save,
                   child: const Text('Save Changes'),

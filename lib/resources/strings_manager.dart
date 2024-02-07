@@ -1,6 +1,10 @@
 // ignore_for_file: constant_identifier_names
 
 class AppStrings {
+  // Routes
+  static const invalidRoute = 'Invalid Route';
+  static const invalidRouteMessage = 'Invalid Route: Please report to dev.';
+
   // General
   static const String appName = 'Spend Tracker';
   static const String appDescription = 'Track money spendings';
