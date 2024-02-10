@@ -56,6 +56,8 @@ GoRouter goRouter = GoRouter(
   ],
 );
 
+
+
 class RouteNames {
   static const splash = 'splash';
 
@@ -76,3 +78,5 @@ class RoutePaths {
       static const editRecord = 'editRecord';
       static const addRecord = 'addRecord';
 }
+
+

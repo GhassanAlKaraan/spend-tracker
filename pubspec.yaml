@@ -7,15 +7,13 @@ environment:
   sdk: '>=3.3.0-174.3.beta <4.0.0'
 
 dependencies:
-  auto_route: ^7.8.4
-
   flutter:
     sdk: flutter
   go_router: ^13.1.0
+  provider: ^6.1.1
   shared_preferences: ^2.2.2
 
 dev_dependencies:
-  auto_route_generator: ^7.3.2
   flutter_native_splash: ^2.3.10
   flutter_launcher_icons: ^0.13.1
 
