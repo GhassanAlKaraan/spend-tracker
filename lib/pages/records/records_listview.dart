@@ -14,31 +14,26 @@ class RecordsListView extends StatefulWidget {
 }
 
 class _RecordsListViewState extends State<RecordsListView> {
-  bool isLoading = true; // Start with loading true
+  // bool isLoading = true; // Start with loading true
 
-  @override
-  void initState() {
-    super.initState();
-    populateProviderList();
-  }
+  // void populateProviderList() {
+  //   Provider.of<RecordProvider>(context, listen: false).populateList(false);
+  //   setState(() {
+  //     isLoading = false; // Data loaded, update loading state
+  //   });
+  // }
 
-  void populateProviderList() async {
-    await Future.delayed(const Duration(seconds: 1)); // simulate waiting time
-    Provider.of<RecordProvider>(context, listen: false).populateList();
-    setState(() {
-      isLoading = false; // Data loaded, update loading state
-    });
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   populateProviderList();
+  // }
 
   @override
   Widget build(BuildContext context) {
     // Using Consumer to listen to RecordProvider changes
     return Consumer<RecordProvider>(
       builder: (context, recordProvider, child) {
-        if (isLoading) {
-          return Center(child: CircularProgressIndicator());
-        }
-
         return ListView.builder(
           itemCount: recordProvider.recordsList.length,
           itemBuilder: (context, index) {
@@ -55,28 +50,41 @@ class _RecordsListViewState extends State<RecordsListView> {
                       4), // Optional: if you want rounded corners
                 ),
                 leading: Text(
-                  item.id.toString(),
-                  style: Theme.of(context).textTheme.displayLarge,
-                ),
-                title: Text(
                   item.type,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
-                subtitle: Text(
-                  '${item.subType} - ${item.description}',
-                  style: Theme.of(context).textTheme.titleSmall,
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      '${item.subType} - ${item.description}',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                  ],
                 ),
-                trailing: Text(
-                  '${item.amount.toString()} ${item.currency}',
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall!
-                      .copyWith(color: ColorManager.secondary),
+                subtitle: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      '${item.amount.toString()} ${item.currency}',
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall!
+                          .copyWith(color: ColorManager.secondary),
+                    ),
+                  ],
+                ),
+                trailing: IconButton(
+                  icon: Icon(Icons.delete_outline),
+                  onPressed: () {
+                    // Provider.of<RecordProvider>(context, listen: false).removeRecord(item.id);
+                    context.read<RecordProvider>().removeRecord(item.id);
+                  },
                 ),
                 onTap: () {
                   context.pushNamed(
                     RouteNames.editRecord,
-                    extra: {'id': item.id, 'details': item},
+                    extra: item,
                   );
                 },
               ),

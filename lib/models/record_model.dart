@@ -7,16 +7,15 @@ class RecordModel {
       required this.subType,
       required this.description,
       required this.amount,
-      required this.currency})
-      : id = _generateId();
+      required this.currency});
 
-  final String id;
+  final String id  = _generateId();
   final String type;
   final String subType;
   final String description;
   final double amount;
   final String currency;
-  final DateTime dateCreated = DateTime.now();
+  final DateTime lastUpdated = DateTime.now();
 
   static String _generateId() {
     var random = Random.secure();
@@ -32,7 +31,7 @@ class RecordModel {
       'description': description,
       'amount': amount,
       'currency': currency,
-      'dateCreated': dateCreated,
+      'lastUpdated': lastUpdated.toString(),
     };
   }
 

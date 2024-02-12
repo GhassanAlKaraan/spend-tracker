@@ -1,59 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:spend_tracker/models/record_model.dart';
 import 'package:spend_tracker/resources/color_manager.dart';
 import 'package:spend_tracker/resources/values_manager.dart';
-import 'package:intl/intl.dart';
 
-class EditRecordCard extends StatefulWidget {
-  final Map<String, dynamic> record;
+class AddRecordCard extends StatefulWidget {
   final Function(Map<String, dynamic>) onSave;
 
-  EditRecordCard({super.key, required this.record, required this.onSave});
+  AddRecordCard({super.key, required this.onSave});
 
   @override
-  State<EditRecordCard> createState() => _EditRecordCardState();
+  State<AddRecordCard> createState() => _AddRecordCardState();
 }
 
-class _EditRecordCardState extends State<EditRecordCard> {
+class _AddRecordCardState extends State<AddRecordCard> {
   // Form key
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   // Controllers
   final TextEditingController _subTypeController = TextEditingController();
-
   final TextEditingController _descriptionController = TextEditingController();
-
   final TextEditingController _amountController = TextEditingController();
-
   final TextEditingController _currencyController = TextEditingController();
-
   final TextEditingController _dateCreatedController = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-    // Initialize text controllers with the current record values
-    _subTypeController.text = widget.record['subType'];
-    _descriptionController.text = widget.record['description'];
-    _amountController.text = widget.record['amount'].toString();
-    _currencyController.text = widget.record['currency'];
-    _dateCreatedController.text = widget.record['dateCreated'].toString();
+  void dispose() {
+    super.dispose();
+    // dispose all text fields
+    _subTypeController.dispose();
+    _descriptionController.dispose();
+    _amountController.dispose();
+    _currencyController.dispose();
+    _dateCreatedController.dispose();
   }
 
   void _save() async {
-    if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate()) { //TODO: implement form validation logic
+      // TODO: create object and save in provider
       // If the form is valid, proceed with updating the record
-      Map<String, dynamic> updatedRecord = {
-        'id': widget.record['id'],
-        'type': widget.record['type'],
-        'subType': _subTypeController.text,
-        'description': _descriptionController.text,
-        'amount':
-            int.tryParse(_amountController.text) ?? widget.record['amount'],
-        'currency': _currencyController.text,
-        'dateCreated': _dateCreatedController.text,
-      };
-
-      widget.onSave(updatedRecord);
+      // RecordModel(type: type, subType: subType, description: description, amount: amount, currency: currency)
+      // widget.onSave(newRecord);
     }
   }
 
@@ -74,9 +60,8 @@ class _EditRecordCardState extends State<EditRecordCard> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const SizedBox(height: AppSize.s20),
-                // Displaying non-editable fields as Text
                 Text(
-                  'Type: ${widget.record['type']}',
+                  '-TYPE DropDown-',
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: AppSize.s20),
@@ -101,17 +86,12 @@ class _EditRecordCardState extends State<EditRecordCard> {
                   controller: _currencyController,
                   decoration: const InputDecoration(labelText: 'Currency'),
                 ),
-                const SizedBox(height: AppSize.s10),
-                Text(
-                  'Last Updated: ${DateFormat('dd-MM-yyyy @ HH:mm a').format(DateTime.parse(widget.record['lastUpdated']))}',
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
                 const SizedBox(height: AppSize.s40),
                 Column(
                   children: [
                     ElevatedButton(
                       onPressed: _save,
-                      child: const Text('Save Changes'),
+                      child: const Text('Create Record'),
                     ),
                   ],
                 ),

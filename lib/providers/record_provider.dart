@@ -3,19 +3,20 @@ import 'package:spend_tracker/models/record_model.dart';
 
 class RecordProvider extends ChangeNotifier {
   // ignore: unused_field
-   List<RecordModel> _recordsList = [];
+  List<RecordModel> _recordsList = [];
 
-   List<RecordModel> get recordsList => _recordsList;
+  List<RecordModel> get recordsList => _recordsList;
 
   // Populate the list with data
-   void populateList() {
+  void populateList(bool repopulate) {
+    //TODO: implement http get method
     final List<Map<String, dynamic>> fetchedRecords = [
       {
         'id': 1,
         'type': 'Family',
         'subType': 'House',
         'description': 'Dinner at house',
-        'amount': 100000,
+        'amount': 100000.0,
         'currency': 'LBP',
         'dateCreated': '4-2-2024',
       },
@@ -33,7 +34,7 @@ class RecordProvider extends ChangeNotifier {
         'type': 'Activity',
         'subType': '',
         'description': '',
-        'amount': 20,
+        'amount': 20.0,
         'currency': 'USD',
         'dateCreated': '20-1-2024',
       },
@@ -42,7 +43,9 @@ class RecordProvider extends ChangeNotifier {
     fetchedRecords.forEach((json) {
       recordsList.add(RecordModel.fromJson(json));
     });
-    notifyListeners();
+    if (repopulate) {
+      notifyListeners();
+    }
   }
 
   // Get one record from List
@@ -65,7 +68,7 @@ class RecordProvider extends ChangeNotifier {
   }
 
   // Remove record from List
-  void removeRecord(int id) {
+  void removeRecord(String id) {
     recordsList.removeWhere((record) => record.id == id);
     notifyListeners();
   }

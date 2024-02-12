@@ -5,6 +5,7 @@ const String IMAGE_PATH = "assets/images";
 
 class ImageAssets {
   static const String splashLogo = "$IMAGE_PATH/splash_logo.png";
+  static const String invalidRoute = "$IMAGE_PATH/invalid_route.png";
 }
 
 // class JsonAssets {

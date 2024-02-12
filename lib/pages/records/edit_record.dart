@@ -7,8 +7,7 @@ import 'edit_record_card.dart';
 
 class EditRecord extends StatelessWidget {
   // const EditRecord({super.key, required this.details,  @PathParam('id') required this.id});
-  const EditRecord({super.key, required this.id, required this.details});
-  final int id; // take index
+  const EditRecord({super.key, required this.details}); // take index
   final Map<String, dynamic> details; // take the details map to populate fields
 
   @override
@@ -18,14 +17,6 @@ class EditRecord extends StatelessWidget {
       hasDrawer: false,
       child: EditRecordCard(record: details, onSave: (Map<String, dynamic> newDetails) {
         //TODO update the record in the provider list
-      
-        // here the function must update the record with newDetails
-        // but where's the record? in the list of records.
-        // where's the list of records? in the provider class
-        // when first fetched, the list in provided must get populated from the api response
-        //! TODO: implement provider ASAP
-        //? This code should be used on the records page to notify UI and update list
-        //? but isn't it done by provider? yes... yeah I should learn a lot more about it.
         // Notify UI of updated list
         // setState(() {});
       

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:spend_tracker/app/app_prefs.dart';
+import 'package:provider/provider.dart';
+import 'package:spend_tracker/pages/system/invalid_route.dart';
+import 'package:spend_tracker/providers/record_provider.dart';
 import 'package:spend_tracker/resources/app_router.dart';
 import 'package:spend_tracker/resources/strings_manager.dart';
-
 import '../resources/color_manager.dart';
+import '../app/utils.dart' as utils;
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -15,19 +16,6 @@ class MyDrawer extends StatefulWidget {
 }
 
 class _MyDrawerState extends State<MyDrawer> {
-  AppPreferences? appPreferences;
-
-  void getAppPrefs() async {
-    // Add loading if needed
-    appPreferences = AppPreferences(await SharedPreferences.getInstance());
-  }
-
-  @override
-  void initState() {
-    getAppPrefs();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -48,21 +36,22 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
           ListTile(
             leading: const Icon(Icons.settings),
-            title: const Text('Settings'),
+            title: const Text('Populate List'),
             onTap: () {
+              Provider.of<RecordProvider>(context, listen: false)
+                  .populateList(true);
               Navigator.pop(context);
             },
           ),
-          appPreferences == null
-              ? ListTile(
-                  leading: const Icon(Icons.logout),
-                  title: const Text('Sign out'),
-                  onTap: () {
-                    appPreferences!.logout();
-                    context.go(RouteNames.splash);
-                  },
-                )
-              : Container(),
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: const Text('Sign out'),
+            onTap: () {
+              //TODO: implement appPreferences!.logout();
+              context.pop();
+              utils.showSnackBar(context, 'Feature not ready yet');
+            },
+          ),
         ],
       ),
     );
