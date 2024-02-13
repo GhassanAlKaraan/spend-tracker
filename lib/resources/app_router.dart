@@ -7,7 +7,7 @@ import 'package:spend_tracker/pages/records/records_page.dart';
 import 'package:spend_tracker/pages/splash/splash_page.dart';
 import 'package:spend_tracker/pages/system/invalid_route.dart';
 
-bool isLoggedIn = true; //TODO: fix login state
+bool isLoggedIn = true; //TODO: User is always logged in.
 
 GoRouter goRouter = GoRouter(
   errorBuilder: (context, state) => const InvalidRoute(),
@@ -24,41 +24,6 @@ GoRouter goRouter = GoRouter(
       name: RouteNames.splash,
       builder: (context, state) => const SplashPage(),
     ),
-    GoRoute( // TODO: remove - temporary
-      path: '/invalidRoute',
-      builder: (context, state) => const InvalidRoute(),
-    ),
-    // GoRoute(
-    //     path: RoutePaths.records,
-    //     name: RouteNames.records,
-    //     pageBuilder: (context, state) {
-    //       return CustomTransitionPage(
-    //         transitionDuration: const Duration(seconds: 3),
-    //         fullscreenDialog: true,
-    //         key: state.pageKey,
-    //         child: const RecordsPage(),
-    //         transitionsBuilder:
-    //             (context, animation, secondaryAnimation, child) {
-    //           return FadeTransition(
-    //             opacity:
-    //                 CurveTween(curve: Curves.easeInOutCirc).animate(animation),
-    //             child: child,
-    //           );
-    //         },
-    //       );
-    //     },
-    //     routes: [
-    //       GoRoute(
-    //           path: RoutePaths.editRecord,
-    //           name: RouteNames.editRecord,
-    //           builder: (context, state) {
-    //             RecordModel record = state.extra as RecordModel;
-    //             return EditRecord(
-    //               details: record.toJson(),
-    //             );
-    //           }),
-    //     ])
-
     GoRoute(
       path: RoutePaths.records,
       name: RouteNames.records,
@@ -88,7 +53,7 @@ GoRouter goRouter = GoRouter(
               fullscreenDialog: true,
               key: state.pageKey,
               child: EditRecord(
-                details: record.toJson(),
+                record: record,
               ),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {

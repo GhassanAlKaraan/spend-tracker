@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spend_tracker/resources/assets_manager.dart';
 import 'package:spend_tracker/resources/strings_manager.dart';
 import 'package:spend_tracker/resources/values_manager.dart';
 import 'package:spend_tracker/widgets/my_scaffold.dart';

@@ -8,50 +8,52 @@ class RecordProvider extends ChangeNotifier {
   List<RecordModel> get recordsList => _recordsList;
 
   // Populate the list with data
-  void populateList(bool repopulate) {
-    //TODO: implement http get method
+  void populateList() {
+    //TODO: implement http getAll method
+
+    // Dummy data
     final List<Map<String, dynamic>> fetchedRecords = [
       {
-        'id': 1,
+        'sId': '65cb805809391a9840127418',
         'type': 'Family',
-        'subType': 'House',
-        'description': 'Dinner at house',
-        'amount': 100000.0,
+        'reason': 'Support',
+        'description': 'Help the family',
+        'amount': 50,
         'currency': 'LBP',
-        'dateCreated': '4-2-2024',
+        "lastUpdated": "2024-02-13T14:44:40.603Z",
       },
       {
-        'id': 2,
+        'sId': '65cb805809391a9840127118',
+        'type': 'Transport',
+        'reason': 'Van',
+        'description': 'Get to home',
+        'amount': 100000,
+        'currency': 'LBP',
+        "lastUpdated": "2024-01-13T12:44:40.603Z",
+      },
+      {
+        'sId': '65cb805809391b9840127118',
         'type': 'Food',
-        'subType': 'Meal',
-        'description': 'Sandwich Lunch',
-        'amount': 5.5,
-        'currency': 'USD',
-        'dateCreated': '1-2-2024',
-      },
-      {
-        'id': 3,
-        'type': 'Activity',
-        'subType': '',
-        'description': '',
-        'amount': 20.0,
-        'currency': 'USD',
-        'dateCreated': '20-1-2024',
+        'reason': 'Meal',
+        'description': 'To have lunch at work',
+        'amount': 500000,
+        'currency': 'LBP',
+        "lastUpdated": "2024-01-13T14:00:40.603Z",
       },
     ];
 
     fetchedRecords.forEach((json) {
       recordsList.add(RecordModel.fromJson(json));
     });
-    if (repopulate) {
-      notifyListeners();
-    }
+
+    notifyListeners();
   }
 
   // Get one record from List
   RecordModel getRecordById(String id) {
+    //TODO replace the code with http call method
     try {
-      return recordsList.firstWhere((record) => record.id == id);
+      return recordsList.firstWhere((record) => record.sId == id);
     } catch (e) {
       throw Exception('Record with ID $id not found');
     }
@@ -59,6 +61,7 @@ class RecordProvider extends ChangeNotifier {
 
   // Add record to List
   void addRecord(RecordModel record) {
+    //TODO replace the code with http call method
     try {
       recordsList.add(record);
       notifyListeners();
@@ -69,13 +72,15 @@ class RecordProvider extends ChangeNotifier {
 
   // Remove record from List
   void removeRecord(String id) {
-    recordsList.removeWhere((record) => record.id == id);
+    //TODO replace the code with http call method
+    recordsList.removeWhere((record) => record.sId == id);
     notifyListeners();
   }
 
   // Update record in List
   void updateRecord(int id, RecordModel newRecord) {
-    int index = recordsList.indexWhere((record) => record.id == id);
+    //TODO replace the code with http call method
+    int index = recordsList.indexWhere((record) => record.sId == id);
     if (index != -1) {
       recordsList[index] = newRecord;
       notifyListeners();

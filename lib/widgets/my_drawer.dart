@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:spend_tracker/pages/system/invalid_route.dart';
 import 'package:spend_tracker/providers/record_provider.dart';
-import 'package:spend_tracker/resources/app_router.dart';
 import 'package:spend_tracker/resources/strings_manager.dart';
 import '../resources/color_manager.dart';
 import '../app/utils.dart' as utils;
@@ -39,7 +37,7 @@ class _MyDrawerState extends State<MyDrawer> {
             title: const Text('Populate List'),
             onTap: () {
               Provider.of<RecordProvider>(context, listen: false)
-                  .populateList(true);
+                  .populateList();
               Navigator.pop(context);
             },
           ),
@@ -47,6 +45,7 @@ class _MyDrawerState extends State<MyDrawer> {
             leading: const Icon(Icons.logout),
             title: const Text('Sign out'),
             onTap: () {
+              // Less priority
               //TODO: implement appPreferences!.logout();
               context.pop();
               utils.showSnackBar(context, 'Feature not ready yet');

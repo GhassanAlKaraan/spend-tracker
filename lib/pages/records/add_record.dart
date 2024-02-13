@@ -14,8 +14,7 @@ class AddRecord extends StatelessWidget {
       appBarTitle: AppStrings.addRecordTitle,
       hasDrawer: false,
       child: AddRecordCard(onSave: (Map<String, dynamic> newDetails) {
-        //TODO create and save new record in the provider list
-        // Notify UI of updated list
+        //TODO use create new method in provider
       
       }),
     );

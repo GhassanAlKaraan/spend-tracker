@@ -13,7 +13,7 @@ class LoginPage extends StatelessWidget {
 
     AppPreferences appPreferences =
         AppPreferences(await SharedPreferences.getInstance());
-    //TODO: Set auth token
+    //TODO: Set authentication
     appPreferences.setIsUserLoggedIn();
   }
 

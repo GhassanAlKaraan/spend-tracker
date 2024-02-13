@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spend_tracker/models/record_model.dart';
 import 'package:spend_tracker/resources/color_manager.dart';
 import 'package:spend_tracker/resources/values_manager.dart';
 
@@ -36,10 +35,9 @@ class _AddRecordCardState extends State<AddRecordCard> {
 
   void _save() async {
     if (_formKey.currentState!.validate()) { //TODO: implement form validation logic
-      // TODO: create object and save in provider
-      // If the form is valid, proceed with updating the record
-      // RecordModel(type: type, subType: subType, description: description, amount: amount, currency: currency)
+      // TODO: return record for the call back, the callback will handle creation!!
       // widget.onSave(newRecord);
+
     }
   }
 
