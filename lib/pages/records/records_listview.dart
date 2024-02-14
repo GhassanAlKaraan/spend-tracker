@@ -39,18 +39,17 @@ class _RecordsListViewState extends State<RecordsListView> {
                           color: ColorManager.primary,
                           width: 1.0,
                         ),
-                        borderRadius: BorderRadius.circular(
-                            4), // Optional: if you want rounded corners
+                        borderRadius: BorderRadius.circular(4),
                       ),
                       leading: Text(
-                        item.type!,
+                        item.type ?? '',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       title: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
-                            '${item.reason} - ${item.description}',
+                            '${item.reason ?? ''} - ${item.description ?? ''}',
                             style: Theme.of(context).textTheme.titleSmall,
                           ),
                         ],
@@ -59,7 +58,7 @@ class _RecordsListViewState extends State<RecordsListView> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
-                            '${item.amount.toString()} ${item.currency}',
+                            '${item.amount.toString()} ${item.currency ?? ''}',
                             style: Theme.of(context)
                                 .textTheme
                                 .titleSmall!
@@ -70,10 +69,17 @@ class _RecordsListViewState extends State<RecordsListView> {
                       trailing: IconButton(
                         icon: Icon(Icons.delete_outline),
                         onPressed: () {
-                          //TODO: Use methods in provider
-                          Provider.of<RecordProvider>(context, listen: false)
-                              .removeRecord(item.sId!);
-                          utils.showSnackBar(context, 'Record removed');
+                          utils.showAlertDialog(context, () {
+                            try {
+                              Provider.of<RecordProvider>(context,
+                                      listen: false)
+                                  .removeRecord(item.sId!);
+                              utils.showSnackBar(context, 'Record removed');
+                            } catch (e) {
+                              utils.showSnackBar(
+                                  context, 'Something wrong happened');
+                            }
+                          }, 'Delete record from DB');
                         },
                       ),
                       onTap: () {

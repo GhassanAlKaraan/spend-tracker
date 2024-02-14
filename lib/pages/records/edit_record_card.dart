@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:spend_tracker/models/record_model.dart';
 import 'package:spend_tracker/resources/color_manager.dart';
 import 'package:spend_tracker/resources/values_manager.dart';
+import '../../app/utils.dart' as utils;
 
 class EditRecordCard extends StatefulWidget {
   final RecordModel record;
-  final Function(RecordModel) onSave; // callback
+  final Function(String, Map<String, dynamic>) onSave; // callback
 
   EditRecordCard({super.key, required this.record, required this.onSave});
 
@@ -18,6 +21,7 @@ class _EditRecordCardState extends State<EditRecordCard> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   // Controllers
+  // Type should not be changed
   final TextEditingController _reasonController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
@@ -26,11 +30,12 @@ class _EditRecordCardState extends State<EditRecordCard> {
   @override
   void initState() {
     super.initState();
-    _reasonController.text = widget.record.reason ?? "";
+    _reasonController.text = widget.record.reason!;
     _descriptionController.text = widget.record.description ?? "";
     _amountController.text = widget.record.amount.toString();
-    _currencyController.text = widget.record.currency  ?? "";
+    _currencyController.text = widget.record.currency!;
   }
+
   @override
   void dispose() {
     super.dispose();
@@ -40,22 +45,49 @@ class _EditRecordCardState extends State<EditRecordCard> {
     _currencyController.dispose();
   }
 
-  void _save() async {
-    // TODO: validate fields are not empty
+  void _updateRecord() async {
     if (_formKey.currentState!.validate()) {
-      // If the form is valid, proceed with updating the record
-      RecordModel newRecordModel = RecordModel(
-        sId: '1234567890', //TODO :: ID MUST NOT BE PART OF MODEL, backend must handle the data manipulation
-        amount: int.tryParse(_amountController.text)?? 0,
-        currency: _currencyController.text, 
-        description: _descriptionController.text,
-        reason: _reasonController.text,
-        type: widget.record.type,
-      );
+      // TODO: add loading
 
-      widget.onSave(newRecordModel);
+      String id = widget.record.sId!;
+
+      Map<String, dynamic> newRecord = {
+        'reason': _reasonController.text.trim(),
+        'description': _descriptionController.text.trim(),
+        'amount': int.tryParse(_amountController.text.trim()) ?? 0,
+        'currency': _currencyController.text.trim()
+      };
+
+      widget.onSave(id, newRecord);
+      utils.showSnackBar(context, 'Record updated.');
+      context.pop();
     }
   }
+
+  String? _validateReason(String? reason) {
+    if (reason == null || reason.isEmpty) {
+      return "Please specify reason";
+    }
+    return null;
+  }
+
+  String? _validateAmount(String? amount) {
+    if (amount == null || amount.isEmpty) {
+      return "Please specify amount";
+    }
+    return null;
+  }
+
+  String? _validateCurrency(String? currency) {
+    if (currency == null || currency.isEmpty) {
+      return "Please specify currency";
+    }
+    if (!currency.isEmpty && currency != 'LBP' && currency != 'USD') {
+      return "Invalid currency, use: LBP or USD";
+    }
+    return null;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -82,24 +114,37 @@ class _EditRecordCardState extends State<EditRecordCard> {
                 const SizedBox(height: AppSize.s20),
                 // Editable fields start here
                 TextFormField(
+                  maxLength: 20,
+                  maxLengthEnforcement: MaxLengthEnforcement.enforced,
                   controller: _reasonController,
-                  decoration: const InputDecoration(labelText: 'Reason'),
+                  validator: _validateReason,
+                  decoration: const InputDecoration(labelText: 'Reason',counterText: "",),
                 ),
                 const SizedBox(height: AppSize.s10),
                 TextFormField(
+                  maxLength: 50,
+                  maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                  maxLines: 3,
+                  minLines: 3,
                   controller: _descriptionController,
-                  decoration: const InputDecoration(labelText: 'Description'),
+                  decoration: const InputDecoration(labelText: 'Description',counterText: "",),
                 ),
                 const SizedBox(height: AppSize.s10),
                 TextFormField(
+                  maxLength: 9,
+                  maxLengthEnforcement: MaxLengthEnforcement.enforced,
                   controller: _amountController,
-                  decoration: const InputDecoration(labelText: 'Amount'),
+                  validator: _validateAmount,
+                  decoration: const InputDecoration(labelText: 'Amount',counterText: "",),
                   keyboardType: TextInputType.number,
                 ),
                 const SizedBox(height: AppSize.s10),
                 TextFormField(
+                  maxLength: 3,
+                  maxLengthEnforcement: MaxLengthEnforcement.enforced,
                   controller: _currencyController,
-                  decoration: const InputDecoration(labelText: 'Currency'),
+                  validator: _validateCurrency,
+                  decoration: const InputDecoration(labelText: 'Currency',counterText: "",),
                 ),
                 const SizedBox(height: AppSize.s10),
                 Text(
@@ -111,7 +156,7 @@ class _EditRecordCardState extends State<EditRecordCard> {
                 Column(
                   children: [
                     ElevatedButton(
-                      onPressed: _save,
+                      onPressed: _updateRecord,
                       child: const Text('Save Changes'),
                     ),
                   ],

@@ -7,7 +7,7 @@ class RecordProvider extends ChangeNotifier {
 
   List<RecordModel> get recordsList => _recordsList;
 
-  final HttpService _httpService = HttpService(); // Instantiate your HTTP service
+  final HttpService _httpService = HttpService();
 
   // Fetch all records from the server
   Future<void> fetchRecords() async {
@@ -20,19 +20,10 @@ class RecordProvider extends ChangeNotifier {
     }
   }
 
-  // Get one record from List
-  RecordModel getRecordById(String id) {
-    try {
-      return recordsList.firstWhere((record) => record.sId == id);
-    } catch (e) {
-      throw Exception('Record with ID $id not found');
-    }
-  }
-
   // Add record to List
-  Future<void> addRecord(RecordModel record) async {
+  Future<void> addRecord(Map<String, dynamic> recordDetails) async {
     try {
-      RecordModel newRecord = await _httpService.createRecord(record);
+      RecordModel newRecord = await _httpService.createRecord(recordDetails);
       _recordsList.add(newRecord);
       notifyListeners();
     } catch (e) {
@@ -52,9 +43,9 @@ class RecordProvider extends ChangeNotifier {
   }
 
   // Update record in List
-  Future<void> updateRecord(String id, RecordModel newRecord) async {
+  Future<void> updateRecord(String id, Map<String, dynamic> updatedRecordDetails) async {
     try {
-      await _httpService.updateRecord(id, newRecord);
+      RecordModel newRecord = await _httpService.updateRecord(id, updatedRecordDetails);
       int index = _recordsList.indexWhere((record) => record.sId == id);
       if (index != -1) {
         _recordsList[index] = newRecord;

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:spend_tracker/pages/records/add_record_card.dart';
+import 'package:spend_tracker/providers/record_provider.dart';
 import 'package:spend_tracker/resources/strings_manager.dart';
 import 'package:spend_tracker/widgets/my_scaffold.dart';
-
+import '../../app/utils.dart' as utils;
 
 class AddRecord extends StatelessWidget {
-  // const EditRecord({super.key, required this.details,  @PathParam('id') required this.id});
   const AddRecord({super.key}); 
 
   @override
@@ -14,8 +15,11 @@ class AddRecord extends StatelessWidget {
       appBarTitle: AppStrings.addRecordTitle,
       hasDrawer: false,
       child: AddRecordCard(onSave: (Map<String, dynamic> newDetails) {
-        //TODO use create new method in provider
-      
+        try {
+          Provider.of<RecordProvider>(context, listen: false).addRecord(newDetails);
+        } catch (e) {
+          utils.showSnackBar(context, 'Something went wrong!');
+        }
       }),
     );
   }

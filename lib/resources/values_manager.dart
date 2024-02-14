@@ -55,5 +55,7 @@ class DurationConstant{
 }
 
 class RadiusConstant{
+  static const double r8 = 8.0;
+  static const double r14 = 14.0;
   static const double r18 = 18.0;
 }

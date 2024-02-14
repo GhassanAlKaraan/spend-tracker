@@ -33,12 +33,19 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.settings),
-            title: const Text('Refresh List'),
+            leading: const Icon(Icons.download),
+            title: const Text('Fetch records'),
             onTap: () {
               Provider.of<RecordProvider>(context, listen: false)
                   .fetchRecords();
               Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.pin_drop_outlined),
+            title: const Text('See dropdown'),
+            onTap: () {
+              context.pushNamed('typedropdown');
             },
           ),
           ListTile(

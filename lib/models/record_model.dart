@@ -5,7 +5,7 @@ class RecordModel {
   String? description;
   int? amount;
   String? currency;
-  String lastUpdated = DateTime.now().toString();
+  String? lastUpdated;
 
   RecordModel(
       {this.sId,
@@ -13,10 +13,12 @@ class RecordModel {
       this.reason,
       this.description,
       this.amount,
-      this.currency});
+      this.currency,
+      this.lastUpdated,
+      });
 
   RecordModel.fromJson(Map<String, dynamic> json) {
-    sId = json['_id'];
+    sId=json['_id'];
     type = json['type'];
     reason = json['reason'];
     description = json['description'];
@@ -25,15 +27,14 @@ class RecordModel {
     lastUpdated = json['lastUpdated'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['type'] = this.type;
-    data['reason'] = this.reason;
-    data['description'] = this.description;
-    data['amount'] = this.amount;
-    data['currency'] = this.currency;
-    data['lastUpdated'] = this.lastUpdated;
-    return data;
-  }
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = new Map<String, dynamic>();
+  //   data['type'] = this.type;
+  //   data['reason'] = this.reason;
+  //   data['description'] = this.description;
+  //   data['amount'] = this.amount;
+  //   data['currency'] = this.currency;
+  //   data['lastUpdated'] = this.lastUpdated;
+  //   return data;
+  // }
 }

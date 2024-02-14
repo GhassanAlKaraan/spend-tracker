@@ -36,33 +36,33 @@ class HttpService {
     }
   }
 
-  Future<RecordModel> createRecord(RecordModel record) async {
+  Future<RecordModel> createRecord(Map<String, dynamic> recordDetails) async {
     try {
       final response = await http.post(
         Uri.parse('$baseUrl/records'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
-        body: jsonEncode(record.toJson()),
+        body: jsonEncode(recordDetails),
       );
       if (response.statusCode == 201) {
         return RecordModel.fromJson(jsonDecode(response.body)['data']);
       } else {
-        throw Exception("Failed to create record");
+        throw Exception("Failed to create record:");
       }
     } catch (e) {
       throw Exception("Failed to create record: $e");
     }
   }
 
-  Future<RecordModel> updateRecord(String id, RecordModel record) async {
+  Future<RecordModel> updateRecord(String id, Map<String, dynamic> recordDetails) async {
     try {
       final response = await http.put(
         Uri.parse('$baseUrl/records/$id'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
-        body: jsonEncode(record.toJson()),
+        body: jsonEncode(recordDetails),
       );
       if (response.statusCode == 200) {
         return RecordModel.fromJson(jsonDecode(response.body)['data']);
@@ -77,8 +77,11 @@ class HttpService {
   Future<void> deleteRecord(String id) async {
     try {
       final response = await http.delete(Uri.parse('$baseUrl/records/$id'));
+      
       if (response.statusCode != 200) {
         throw Exception("Failed to delete record");
+      }else{
+        print('Record deleted');
       }
     } catch (e) {
       throw Exception("Failed to delete record: $e");
