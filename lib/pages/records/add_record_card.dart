@@ -194,7 +194,7 @@ class _AddRecordCardState extends State<AddRecordCard> {
                   ),
                 ),
                 const SizedBox(height: AppSize.s10),
-                TextFormField(
+                TextFormField( //TODO: accept only numbers
                   maxLength: 9,
                   maxLengthEnforcement: MaxLengthEnforcement.enforced,
                   controller: _amountController,
