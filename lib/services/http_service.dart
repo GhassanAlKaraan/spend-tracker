@@ -3,30 +3,85 @@ import 'package:http/http.dart' as http;
 import 'package:spend_tracker/models/record_model.dart';
 
 class HttpService {
-  final String baseUrl = "http://10.0.2.2:8000/api/records/"; // refactor this url
+  final String baseUrl = "http://10.0.2.2:5900/api/v1";
 
   Future<List<RecordModel>> getRecords() async {
-    // Define your headers here
-    Map<String, String> headers = {
-      'Content-Type': 'application/json', // Example header
-      // Add more headers if needed
-    };
+    try {
+      final response = await http.get(Uri.parse('$baseUrl/records'));
+      if (response.statusCode == 200) {
+        final List<dynamic> body = jsonDecode(response.body)['data'];
+        print(body);
+        List<RecordModel> records = body
+            .map((dynamic item) => RecordModel.fromJson(item))
+            .toList();
+        return records;
+      } else {
+        throw Exception("Failed to fetch records response.statusCode=${response.statusCode}");
+      }
+    } catch (e) {
+      throw Exception("Failed to fetch records: $e");
+    }
+  }
 
-    // Pass headers to the get method
-    http.Response res = await http.get(
-      Uri.parse(baseUrl),
-      headers: headers,
-    );
+  Future<RecordModel> getRecordById(String id) async {
+    try {
+      final response = await http.get(Uri.parse('$baseUrl/records/$id'));
+      if (response.statusCode == 200) {
+        return RecordModel.fromJson(jsonDecode(response.body)['data']);
+      } else {
+        throw Exception("Failed to fetch record");
+      }
+    } catch (e) {
+      throw Exception("Failed to fetch record: $e");
+    }
+  }
 
-    if (res.statusCode == 200) {
-      List<dynamic> body = jsonDecode(res.body);
+  Future<RecordModel> createRecord(RecordModel record) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/records'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(record.toJson()),
+      );
+      if (response.statusCode == 201) {
+        return RecordModel.fromJson(jsonDecode(response.body)['data']);
+      } else {
+        throw Exception("Failed to create record");
+      }
+    } catch (e) {
+      throw Exception("Failed to create record: $e");
+    }
+  }
 
-      List<RecordModel> records = body
-          .map((dynamic item) => RecordModel.fromJson(item))
-          .toList();
-      return records;
-    } else {
-      throw Exception("Failed to fetch records");
+  Future<RecordModel> updateRecord(String id, RecordModel record) async {
+    try {
+      final response = await http.put(
+        Uri.parse('$baseUrl/records/$id'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(record.toJson()),
+      );
+      if (response.statusCode == 200) {
+        return RecordModel.fromJson(jsonDecode(response.body)['data']);
+      } else {
+        throw Exception("Failed to update record");
+      }
+    } catch (e) {
+      throw Exception("Failed to update record: $e");
+    }
+  }
+
+  Future<void> deleteRecord(String id) async {
+    try {
+      final response = await http.delete(Uri.parse('$baseUrl/records/$id'));
+      if (response.statusCode != 200) {
+        throw Exception("Failed to delete record");
+      }
+    } catch (e) {
+      throw Exception("Failed to delete record: $e");
     }
   }
 }

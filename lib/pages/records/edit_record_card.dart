@@ -21,7 +21,7 @@ class _EditRecordCardState extends State<EditRecordCard> {
   final TextEditingController _reasonController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
-  final TextEditingController _currencyController = TextEditingController();
+  final TextEditingController _currencyController = TextEditingController(); //TODO: must be dropdown
 
   @override
   void initState() {
@@ -47,9 +47,8 @@ class _EditRecordCardState extends State<EditRecordCard> {
       RecordModel newRecordModel = RecordModel(
         sId: '1234567890', //TODO :: ID MUST NOT BE PART OF MODEL, backend must handle the data manipulation
         amount: int.tryParse(_amountController.text)?? 0,
-        currency: _currencyController.text, //TODO: must be dropdown
+        currency: _currencyController.text, 
         description: _descriptionController.text,
-        lastUpdated: DateTime.now().toString(), //TODO ????
         reason: _reasonController.text,
         type: widget.record.type,
       );

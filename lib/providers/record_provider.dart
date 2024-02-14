@@ -1,57 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:spend_tracker/models/record_model.dart';
+import 'package:spend_tracker/services/http_service.dart'; // Import your HTTP service file
 
 class RecordProvider extends ChangeNotifier {
-  // ignore: unused_field
   List<RecordModel> _recordsList = [];
 
   List<RecordModel> get recordsList => _recordsList;
 
-  // Populate the list with data
-  void populateList() {
-    //TODO: implement http getAll method
+  final HttpService _httpService = HttpService(); // Instantiate your HTTP service
 
-    // Dummy data
-    final List<Map<String, dynamic>> fetchedRecords = [
-      {
-        'sId': '65cb805809391a9840127418',
-        'type': 'Family',
-        'reason': 'Support',
-        'description': 'Help the family',
-        'amount': 50,
-        'currency': 'LBP',
-        "lastUpdated": "2024-02-13T14:44:40.603Z",
-      },
-      {
-        'sId': '65cb805809391a9840127118',
-        'type': 'Transport',
-        'reason': 'Van',
-        'description': 'Get to home',
-        'amount': 100000,
-        'currency': 'LBP',
-        "lastUpdated": "2024-01-13T12:44:40.603Z",
-      },
-      {
-        'sId': '65cb805809391b9840127118',
-        'type': 'Food',
-        'reason': 'Meal',
-        'description': 'To have lunch at work',
-        'amount': 500000,
-        'currency': 'LBP',
-        "lastUpdated": "2024-01-13T14:00:40.603Z",
-      },
-    ];
-
-    fetchedRecords.forEach((json) {
-      recordsList.add(RecordModel.fromJson(json));
-    });
-
-    notifyListeners();
+  // Fetch all records from the server
+  Future<void> fetchRecords() async {
+    try {
+      List<RecordModel> records = await _httpService.getRecords();
+      _recordsList = records;
+      notifyListeners();
+    } catch (e) {
+      throw Exception('Failed to fetch records: $e');
+    }
   }
 
   // Get one record from List
   RecordModel getRecordById(String id) {
-    //TODO replace the code with http call method
     try {
       return recordsList.firstWhere((record) => record.sId == id);
     } catch (e) {
@@ -60,32 +30,40 @@ class RecordProvider extends ChangeNotifier {
   }
 
   // Add record to List
-  void addRecord(RecordModel record) {
-    //TODO replace the code with http call method
+  Future<void> addRecord(RecordModel record) async {
     try {
-      recordsList.add(record);
+      RecordModel newRecord = await _httpService.createRecord(record);
+      _recordsList.add(newRecord);
       notifyListeners();
-    } catch (err) {
-      throw Exception('Error adding the record to the provider list');
+    } catch (e) {
+      throw Exception('Error adding the record: $e');
     }
   }
 
   // Remove record from List
-  void removeRecord(String id) {
-    //TODO replace the code with http call method
-    recordsList.removeWhere((record) => record.sId == id);
-    notifyListeners();
+  Future<void> removeRecord(String id) async {
+    try {
+      await _httpService.deleteRecord(id);
+      _recordsList.removeWhere((record) => record.sId == id);
+      notifyListeners();
+    } catch (e) {
+      throw Exception('Error removing the record: $e');
+    }
   }
 
   // Update record in List
-  void updateRecord(int id, RecordModel newRecord) {
-    //TODO replace the code with http call method
-    int index = recordsList.indexWhere((record) => record.sId == id);
-    if (index != -1) {
-      recordsList[index] = newRecord;
-      notifyListeners();
-    } else {
-      throw Exception('Record with ID $id not found');
+  Future<void> updateRecord(String id, RecordModel newRecord) async {
+    try {
+      await _httpService.updateRecord(id, newRecord);
+      int index = _recordsList.indexWhere((record) => record.sId == id);
+      if (index != -1) {
+        _recordsList[index] = newRecord;
+        notifyListeners();
+      } else {
+        throw Exception('Record with ID $id not found');
+      }
+    } catch (e) {
+      throw Exception('Error updating the record: $e');
     }
   }
 }

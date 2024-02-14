@@ -5,7 +5,7 @@ class RecordModel {
   String? description;
   int? amount;
   String? currency;
-  String? lastUpdated;
+  String lastUpdated = DateTime.now().toString();
 
   RecordModel(
       {this.sId,
@@ -13,8 +13,7 @@ class RecordModel {
       this.reason,
       this.description,
       this.amount,
-      this.currency,
-      this.lastUpdated});
+      this.currency});
 
   RecordModel.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];

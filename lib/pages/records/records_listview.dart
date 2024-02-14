@@ -20,64 +20,72 @@ class _RecordsListViewState extends State<RecordsListView> {
     // Using Consumer to listen to RecordProvider changes
     return Consumer<RecordProvider>(
       builder: (context, recordProvider, child) {
-        return ListView.builder(
-          itemCount: recordProvider.recordsList.length,
-          itemBuilder: (context, index) {
-            final item = recordProvider.recordsList[index];
-            return Padding(
-              padding: const EdgeInsets.all(AppPadding.p4),
-              child: ListTile(
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                    color: ColorManager.primary,
-                    width: 1.0,
-                  ),
-                  borderRadius: BorderRadius.circular(
-                      4), // Optional: if you want rounded corners
-                ),
-                leading: Text(
-                  item.type!,
+        return recordProvider.recordsList.isEmpty
+            ? Center(
+                child: Text(
+                  "No Records",
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      '${item.reason} - ${item.description}',
-                      style: Theme.of(context).textTheme.titleSmall,
+              )
+            : ListView.builder(
+                itemCount: recordProvider.recordsList.length,
+                itemBuilder: (context, index) {
+                  final item = recordProvider.recordsList[index];
+                  return Padding(
+                    padding: const EdgeInsets.all(AppPadding.p4),
+                    child: ListTile(
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                          color: ColorManager.primary,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                            4), // Optional: if you want rounded corners
+                      ),
+                      leading: Text(
+                        item.type!,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            '${item.reason} - ${item.description}',
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                        ],
+                      ),
+                      subtitle: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            '${item.amount.toString()} ${item.currency}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall!
+                                .copyWith(color: ColorManager.secondary),
+                          ),
+                        ],
+                      ),
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete_outline),
+                        onPressed: () {
+                          //TODO: Use methods in provider
+                          Provider.of<RecordProvider>(context, listen: false)
+                              .removeRecord(item.sId!);
+                          utils.showSnackBar(context, 'Record removed');
+                        },
+                      ),
+                      onTap: () {
+                        context.pushNamed(
+                          RouteNames.editRecord,
+                          extra: item,
+                        );
+                      },
                     ),
-                  ],
-                ),
-                subtitle: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      '${item.amount.toString()} ${item.currency}',
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleSmall!
-                          .copyWith(color: ColorManager.secondary),
-                    ),
-                  ],
-                ),
-                trailing: IconButton(
-                  icon: Icon(Icons.delete_outline),
-                  onPressed: () {
-                    //TODO: Use methods in provider
-                    Provider.of<RecordProvider>(context, listen: false).removeRecord(item.sId!) ;
-                    utils.showSnackBar(context, 'Record removed');
-                  },
-                ),
-                onTap: () {
-                  context.pushNamed(
-                    RouteNames.editRecord,
-                    extra: item,
                   );
                 },
-              ),
-            );
-          },
-        );
+              );
       },
     );
   }

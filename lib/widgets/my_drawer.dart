@@ -34,10 +34,10 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
           ListTile(
             leading: const Icon(Icons.settings),
-            title: const Text('Populate List'),
+            title: const Text('Refresh List'),
             onTap: () {
               Provider.of<RecordProvider>(context, listen: false)
-                  .populateList();
+                  .fetchRecords();
               Navigator.pop(context);
             },
           ),
