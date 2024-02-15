@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
-import 'package:spend_tracker/providers/record_provider.dart';
 import 'package:spend_tracker/resources/strings_manager.dart';
 import '../resources/color_manager.dart';
 import '../app/utils.dart' as utils;

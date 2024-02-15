@@ -96,6 +96,7 @@ class _RecordsListViewState extends State<RecordsListView> {
                         },
                       ),
                       onTap: () {
+                        print(item.lastUpdated);
                         context.pushNamed(
                           RouteNames.editRecord,
                           extra: item,

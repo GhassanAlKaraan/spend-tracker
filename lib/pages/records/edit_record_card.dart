@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:spend_tracker/app/functions.dart';
 import 'package:spend_tracker/models/record_model.dart';
 import 'package:spend_tracker/resources/color_manager.dart';
@@ -37,6 +38,7 @@ class _EditRecordCardState extends State<EditRecordCard> {
     _reasonController.text = widget.record.reason!;
     _descriptionController.text = widget.record.description ?? "";
     _amountController.text = widget.record.amount.toString();
+    _chosenCurrencyValue = widget.record.currency!;
   }
 
   @override
@@ -45,7 +47,6 @@ class _EditRecordCardState extends State<EditRecordCard> {
     _reasonController.dispose();
     _descriptionController.dispose();
     _amountController.dispose();
-    // _currencyController.dispose();
   }
 
   void _updateRecord() async {
@@ -138,7 +139,7 @@ class _EditRecordCardState extends State<EditRecordCard> {
                 MyDropDown(
                   hintText: "Currency",
                   listOfValues: _currencyList,
-                  initialValue: widget.record.currency!,
+                  initialValue: _chosenCurrencyValue,
                   onChoose: (value) {
                     setState(() {
                       _chosenCurrencyValue = value;
@@ -147,8 +148,8 @@ class _EditRecordCardState extends State<EditRecordCard> {
                 ),
                 const SizedBox(height: AppSize.s10),
                 Text(
-                  // 'Last Updated: ${DateFormat('dd-MM-yyyy @ HH:mm a').format(DateTime.parse(widget.record.lastUpdated))}',
-                  'Last Updated: ${widget.record.lastUpdated}',
+                  'Last Updated: ${DateFormat('dd-MM-yyyy @ HH:mm a').format(DateTime.parse(widget.record.lastUpdated!).toLocal())}',
+                  // 'Last Updated: ${widget.record.lastUpdated}',
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
                 const SizedBox(height: AppSize.s40),
