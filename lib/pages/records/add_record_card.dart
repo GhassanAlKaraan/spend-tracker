@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:spend_tracker/app/functions.dart';
 import 'package:spend_tracker/resources/color_manager.dart';
-import 'package:spend_tracker/resources/styles_manager.dart';
 import 'package:spend_tracker/resources/values_manager.dart';
+import 'package:spend_tracker/widgets/my_dropdown.dart';
 import '../../app/utils.dart' as utils;
 
 class AddRecordCard extends StatefulWidget {
@@ -20,15 +21,17 @@ class _AddRecordCardState extends State<AddRecordCard> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   // Values
-  var chosenTypeValue;
-  List<String> typeList = ["family", "food", "health", "transport", "other"];
+  var _chosenTypeValue;
+  var _chosenCurrencyValue;
+
+  //TODO: populate in provider
+  List<String> _typeList = ["family", "food", "health", "transport", "other"];
+  List<String> _currencyList = ["LBP", "USD"];
 
   // Controllers
   final TextEditingController _reasonController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
-  final TextEditingController _amountController =
-      TextEditingController(); //TODO: must be a dropdown menu
-  final TextEditingController _currencyController = TextEditingController();
+  final TextEditingController _amountController = TextEditingController();
 
   @override
   void dispose() {
@@ -36,18 +39,17 @@ class _AddRecordCardState extends State<AddRecordCard> {
     _reasonController.dispose();
     _descriptionController.dispose();
     _amountController.dispose();
-    _currencyController.dispose();
   }
 
   void _createRecord() async {
     if (_formKey.currentState!.validate()) {
       // TODO: add loading
       Map<String, dynamic> newDetails = {
-        'type': chosenTypeValue,
+        'type': _chosenTypeValue,
         'reason': _reasonController.text.trim(),
         'description': _descriptionController.text.trim(),
         'amount': int.tryParse(_amountController.text.trim()) ?? 0,
-        'currency': _currencyController.text.trim()
+        'currency': _chosenCurrencyValue!
       };
       widget.onSave(newDetails);
       utils.showSnackBar(context, 'Record created.');
@@ -69,16 +71,6 @@ class _AddRecordCardState extends State<AddRecordCard> {
     return null;
   }
 
-  String? _validateCurrency(String? currency) {
-    if (currency == null || currency.isEmpty) {
-      return "Please specify currency";
-    }
-    if (!currency.isEmpty && currency != 'LBP' && currency != 'USD') {
-      return "Invalid currency, use: LBP or USD";
-    }
-    return null;
-  }
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -96,80 +88,15 @@ class _AddRecordCardState extends State<AddRecordCard> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const SizedBox(height: AppSize.s20),
-                DropdownButtonFormField(
-                    decoration: InputDecoration(
-                      fillColor: Colors.transparent,
-                      filled: true,
-                      contentPadding:
-                          const EdgeInsets.only(right: 10, left: 10),
-                      border: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.black, width: AppSize.s1_5),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(RadiusConstant.r14),
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: ColorManager.primary, width: AppSize.s1_5),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(RadiusConstant.r14),
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: ColorManager.grey, width: AppSize.s1_5),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(RadiusConstant.r14),
-                        ),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              width: AppSize.s1_5, color: Colors.red),
-                          borderRadius:
-                              BorderRadius.circular(RadiusConstant.r14)),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(RadiusConstant.r8),
-                        borderSide: BorderSide(
-                            color: ColorManager.primary, width: AppSize.s1_5),
-                      ),
-                    ),
-                    elevation: 1,
-                    validator: (value) {
-                      if (value == null || value.toString().isEmpty) {
-                        return 'Please specify Type';
-                      } else {
-                        return null;
-                      }
-                    },
-                    isExpanded: true,
-                    hint: Text(
-                      "Type",
-                      style: getRegularStyle(color: ColorManager.grey1),
-                    ),
-                    iconSize: 30,
-                    iconEnabledColor: ColorManager.primary,
-                    icon: const Icon(
-                      Icons.arrow_drop_down_sharp,
-                      size: AppSize.s14,
-                    ),
-                    value: chosenTypeValue,
-                    items:
-                        typeList.map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(
-                          value,
-                          style: getRegularStyle(color: ColorManager.grey1)
-                              .copyWith(fontSize: AppSize.s16),
-                        ),
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        chosenTypeValue = value;
-                      });
-                    }),
+                MyDropDown(
+                  hintText: "Type",
+                  listOfValues: _typeList,
+                  onChoose: (value) {
+                    setState(() {
+                      _chosenTypeValue = value;
+                    });
+                  },
+                ),
                 const SizedBox(height: AppSize.s10),
                 TextFormField(
                   maxLength: 20,
@@ -194,9 +121,13 @@ class _AddRecordCardState extends State<AddRecordCard> {
                   ),
                 ),
                 const SizedBox(height: AppSize.s10),
-                TextFormField( //TODO: accept only numbers
+                TextFormField(
                   maxLength: 9,
                   maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                  inputFormatters: <TextInputFormatter>[
+                    createNumberFilter(),
+                    NumberInputFormatter()
+                  ],
                   controller: _amountController,
                   validator: _validateAmount,
                   decoration: const InputDecoration(
@@ -206,15 +137,14 @@ class _AddRecordCardState extends State<AddRecordCard> {
                   keyboardType: TextInputType.number,
                 ),
                 const SizedBox(height: AppSize.s10),
-                TextFormField(
-                  maxLength: 3,
-                  maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                  controller: _currencyController,
-                  validator: _validateCurrency,
-                  decoration: const InputDecoration(
-                    labelText: 'Currency',
-                    counterText: "",
-                  ),
+                MyDropDown(
+                  hintText: "Currency",
+                  listOfValues: _currencyList,
+                  onChoose: (value) {
+                    setState(() {
+                      _chosenCurrencyValue = value;
+                    });
+                  },
                 ),
                 const SizedBox(height: AppSize.s40),
                 Column(

@@ -14,7 +14,16 @@ class RecordsListView extends StatefulWidget {
   State<RecordsListView> createState() => _RecordsListViewState();
 }
 
+
+
 class _RecordsListViewState extends State<RecordsListView> {
+
+@override
+  void initState() {
+    super.initState();
+    Provider.of<RecordProvider>(context, listen: false).fetchRecords();
+  }
+  
   @override
   Widget build(BuildContext context) {
     // Using Consumer to listen to RecordProvider changes
@@ -69,6 +78,8 @@ class _RecordsListViewState extends State<RecordsListView> {
                       trailing: IconButton(
                         icon: Icon(Icons.delete_outline),
                         onPressed: () {
+
+                          //TODO: refactor
                           utils.showAlertDialog(context, () {
                             try {
                               Provider.of<RecordProvider>(context,

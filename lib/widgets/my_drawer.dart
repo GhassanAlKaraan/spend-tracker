@@ -33,26 +33,17 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.download),
-            title: const Text('Fetch records'),
+            leading: const Icon(Icons.settings),
+            title: const Text('Settings'),
             onTap: () {
-              Provider.of<RecordProvider>(context, listen: false)
-                  .fetchRecords();
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.pin_drop_outlined),
-            title: const Text('See dropdown'),
-            onTap: () {
-              context.pushNamed('typedropdown');
+              context.pop();
+              utils.showSnackBar(context, 'Feature not ready yet');
             },
           ),
           ListTile(
             leading: const Icon(Icons.logout),
             title: const Text('Sign out'),
             onTap: () {
-              // Less priority
               //TODO: implement appPreferences!.logout();
               context.pop();
               utils.showSnackBar(context, 'Feature not ready yet');

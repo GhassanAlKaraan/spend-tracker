@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:spend_tracker/app/functions.dart';
 import 'package:spend_tracker/models/record_model.dart';
 import 'package:spend_tracker/resources/color_manager.dart';
 import 'package:spend_tracker/resources/values_manager.dart';
+import 'package:spend_tracker/widgets/my_dropdown.dart';
 import '../../app/utils.dart' as utils;
 
 class EditRecordCard extends StatefulWidget {
@@ -20,12 +22,14 @@ class _EditRecordCardState extends State<EditRecordCard> {
   // Form key
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  // Values
+  var _chosenCurrencyValue;
+  List<String> _currencyList = ["LBP", "USD"];
+
   // Controllers
-  // Type should not be changed
   final TextEditingController _reasonController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
-  final TextEditingController _currencyController = TextEditingController(); //TODO: must be dropdown
 
   @override
   void initState() {
@@ -33,7 +37,6 @@ class _EditRecordCardState extends State<EditRecordCard> {
     _reasonController.text = widget.record.reason!;
     _descriptionController.text = widget.record.description ?? "";
     _amountController.text = widget.record.amount.toString();
-    _currencyController.text = widget.record.currency!;
   }
 
   @override
@@ -42,7 +45,7 @@ class _EditRecordCardState extends State<EditRecordCard> {
     _reasonController.dispose();
     _descriptionController.dispose();
     _amountController.dispose();
-    _currencyController.dispose();
+    // _currencyController.dispose();
   }
 
   void _updateRecord() async {
@@ -55,7 +58,7 @@ class _EditRecordCardState extends State<EditRecordCard> {
         'reason': _reasonController.text.trim(),
         'description': _descriptionController.text.trim(),
         'amount': int.tryParse(_amountController.text.trim()) ?? 0,
-        'currency': _currencyController.text.trim()
+        'currency': _chosenCurrencyValue
       };
 
       widget.onSave(id, newRecord);
@@ -77,17 +80,6 @@ class _EditRecordCardState extends State<EditRecordCard> {
     }
     return null;
   }
-
-  String? _validateCurrency(String? currency) {
-    if (currency == null || currency.isEmpty) {
-      return "Please specify currency";
-    }
-    if (!currency.isEmpty && currency != 'LBP' && currency != 'USD') {
-      return "Invalid currency, use: LBP or USD";
-    }
-    return null;
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -133,18 +125,25 @@ class _EditRecordCardState extends State<EditRecordCard> {
                 TextFormField(
                   maxLength: 9,
                   maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                  inputFormatters: <TextInputFormatter>[
+                    createNumberFilter(),
+                    NumberInputFormatter()
+                  ],
                   controller: _amountController,
                   validator: _validateAmount,
                   decoration: const InputDecoration(labelText: 'Amount',counterText: "",),
                   keyboardType: TextInputType.number,
                 ),
                 const SizedBox(height: AppSize.s10),
-                TextFormField(
-                  maxLength: 3,
-                  maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                  controller: _currencyController,
-                  validator: _validateCurrency,
-                  decoration: const InputDecoration(labelText: 'Currency',counterText: "",),
+                MyDropDown(
+                  hintText: "Currency",
+                  listOfValues: _currencyList,
+                  initialValue: widget.record.currency!,
+                  onChoose: (value) {
+                    setState(() {
+                      _chosenCurrencyValue = value;
+                    });
+                  },
                 ),
                 const SizedBox(height: AppSize.s10),
                 Text(
