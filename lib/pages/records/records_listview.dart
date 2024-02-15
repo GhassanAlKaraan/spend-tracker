@@ -57,9 +57,11 @@ class _RecordsListViewState extends State<RecordsListView> {
                       title: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text(
-                            '${item.reason ?? ''} - ${item.description ?? ''}',
-                            style: Theme.of(context).textTheme.titleSmall,
+                          Flexible(
+                            child: Text(
+                              '${item.reason ?? ''} - ${item.description ?? ''}',
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
                           ),
                         ],
                       ),
