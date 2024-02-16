@@ -80,8 +80,6 @@ class _RecordsListViewState extends State<RecordsListView> {
                       trailing: IconButton(
                         icon: Icon(Icons.delete_outline),
                         onPressed: () {
-
-                          //TODO: refactor
                           utils.showAlertDialog(context, () {
                             try {
                               Provider.of<RecordProvider>(context,

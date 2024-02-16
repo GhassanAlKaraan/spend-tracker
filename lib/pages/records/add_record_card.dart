@@ -24,7 +24,6 @@ class _AddRecordCardState extends State<AddRecordCard> {
   var _chosenTypeValue;
   var _chosenCurrencyValue;
 
-  //TODO: populate in provider
   List<String> _typeList = ["family", "food", "health", "transport", "other"];
   List<String> _currencyList = ["LBP", "USD"];
 
@@ -43,7 +42,7 @@ class _AddRecordCardState extends State<AddRecordCard> {
 
   void _createRecord() async {
     if (_formKey.currentState!.validate()) {
-      // TODO: add loading
+      // loading not implemented
       Map<String, dynamic> newDetails = {
         'type': _chosenTypeValue,
         'reason': _reasonController.text.trim(),

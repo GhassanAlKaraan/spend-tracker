@@ -51,7 +51,7 @@ class _EditRecordCardState extends State<EditRecordCard> {
 
   void _updateRecord() async {
     if (_formKey.currentState!.validate()) {
-      // TODO: add loading
+      // loading not implemented
 
       String id = widget.record.sId!;
 

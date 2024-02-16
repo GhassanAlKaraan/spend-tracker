@@ -16,9 +16,9 @@ class LoginCard extends StatelessWidget {
   final TextEditingController _passwordController = TextEditingController();
 
   void _login() async{
-    // TODO: implement loading: use custom package (Phil)
+    // loading not implemented
     if (_formKey.currentState!.validate()) {
-      //TODO: If the form is valid, proceed with the login logic
+      //TODO: Login logic.
       
       // This athenticates the user and updates the shared preferences.
       await authorize();
