@@ -6,7 +6,7 @@ import '../../resources/values_manager.dart';
 
 class LoginCard extends StatelessWidget {
 
-  final Function() authorize;
+  final Function() authorize; // Not a call back
 
   LoginCard({super.key, required this.authorize});
   // Form key
