@@ -1,6 +1,6 @@
 # Spend Tracker
 
-Simple Flutter app to track expenses connected to NodeJs/ExpressJs/MongoDB backend API. \
+Simple Flutter app to track expenses connected to NodeJs/ExpressJs/MongoDB backend API.
 
 # Backend
 
