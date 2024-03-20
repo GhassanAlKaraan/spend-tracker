@@ -1,26 +1,26 @@
-// ignore_for_file: constant_identifier_names
+// // ignore_for_file: constant_identifier_names
 
-import 'package:shared_preferences/shared_preferences.dart';
-
-
-const String PREFS_IS_USER_LOGGED_IN = "PREFS_KEY_IS_USER_LOGGED_IN";
+// import 'package:shared_preferences/shared_preferences.dart';
 
 
-class AppPreferences {
-  final SharedPreferences _sharedPreferences;
-
-  AppPreferences(this._sharedPreferences);
+// const String PREFS_IS_USER_LOGGED_IN = "PREFS_KEY_IS_USER_LOGGED_IN";
 
 
-  Future<void> setIsUserLoggedIn() async {
-    _sharedPreferences.setBool(PREFS_IS_USER_LOGGED_IN, true);
-  }
+// class AppPreferences {
+//   final SharedPreferences _sharedPreferences;
 
-  Future<bool> isUserLoggedIn() async {
-    return _sharedPreferences.getBool(PREFS_IS_USER_LOGGED_IN) ?? false;
-  }
+//   AppPreferences(this._sharedPreferences);
 
-  Future<void> logout() async {
-    _sharedPreferences.remove(PREFS_IS_USER_LOGGED_IN);
-  }
-}
+
+//   Future<void> setIsUserLoggedIn() async {
+//     _sharedPreferences.setBool(PREFS_IS_USER_LOGGED_IN, true);
+//   }
+
+//   Future<bool> isUserLoggedIn() async {
+//     return _sharedPreferences.getBool(PREFS_IS_USER_LOGGED_IN) ?? false;
+//   }
+
+//   Future<void> logout() async {
+//     _sharedPreferences.remove(PREFS_IS_USER_LOGGED_IN);
+//   }
+// }
